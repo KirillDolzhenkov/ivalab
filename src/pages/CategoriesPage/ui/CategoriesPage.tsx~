@@ -1,9 +1,8 @@
-import React from 'react';
-import {Table} from 'antd';
-import styles from "../../expenses/ui/ExpensesPage.module.less";
+ import {Table} from 'antd';
+import styles from "../../ExpensesPage/ui/ExpensesPage.module.less";
 
 
-export const CategoriesPage: React.FC = () => {
+export const CategoriesPage = () => {
 
     const columnsData = [
         { title: 'Name', dataIndex: 'name', key: 'name' },
@@ -26,4 +25,4 @@ export const CategoriesPage: React.FC = () => {
             </div>
         </>
     );
-};
+}
