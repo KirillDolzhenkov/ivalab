@@ -1,6 +1,7 @@
 import {memo, useMemo} from "react";
 import { Table } from "antd";
-import { IExpense } from "../model/expensesSlice";
+import {IExpense} from "@/features/expenses/model/expensesSlice.ts";
+
 
 interface ExpensesTableProps {
     expenses: IExpense[];

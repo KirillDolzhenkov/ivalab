@@ -1,10 +1,11 @@
 import { useCallback, useState } from "react";
 import {ExpensesTable} from "./ExpensesTable";
 import {ExpenseModal} from "./ExpenseModal";
-import { useAppSelector } from "../../../shared/lib/hooks/useAppSelector";
+
 import { expensesSelectors, IExpense } from "../model/expensesSlice";
 import styles from "./ExpensesPage.module.less";
 import {Button} from "antd";
+import {useAppSelector} from "@/shared/lib/hooks/useAppSelector.ts";
 
 export const ExpensesPage = () => {
     const expenses = useAppSelector(expensesSelectors.getExpenses);
