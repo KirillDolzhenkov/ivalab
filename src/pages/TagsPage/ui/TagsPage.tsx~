@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { Button } from 'antd';
-import { TagsTable } from '@/entities/TagsTable/TagsTable.tsx';
-import { TagModal } from '@/entities/TagModal/TagModal.tsx';
+import { TagsTable } from './TagsTable';
+import { TagModal } from './TagModal';
 
 import { useAppSelector } from '@/shared/lib/hooks/useAppSelector';
 import styles from './TagsPage.module.less';

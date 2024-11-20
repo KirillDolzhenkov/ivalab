@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
-import { ExpensesTable } from '../../../entities/ExpensesTable/ExpensesTable.tsx';
-import { ExpenseModal } from '../../../entities/ExpenseModal/ExpenseModal.tsx';
+import { ExpensesTable } from '@/entities/ExpensesTable/ExpensesTable.tsx';
+import { ExpenseModal } from '@/entities/ExpenseModal/ExpenseModal.tsx';
 
 import { expensesSelectors, IExpense } from '@/pages/ExpensesPage/model/expensesSlice.ts';
 import styles from './ExpensesPage.module.less';
@@ -13,6 +13,7 @@ export const ExpensesPage = () => {
   const [selectedExpense, setSelectedExpense] = useState<IExpense | null>(null);
 
   const handleOpenModal = useCallback(() => {
+    setSelectedExpense(null);
     setIsModalOpen(true);
   }, []);
 

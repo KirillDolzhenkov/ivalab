@@ -1,5 +1,5 @@
 import { memo, useMemo } from 'react';
-import { Table } from 'antd';
+import { Table, Tag } from 'antd';
 import { IExpense } from '@/pages/ExpensesPage/model/expensesSlice.ts';
 
 interface ExpensesTableProps {
@@ -14,7 +14,17 @@ export const ExpensesTable = memo((props: ExpensesTableProps) => {
       { title: 'Дата', dataIndex: 'date', key: 'date' },
       { title: 'Категория', dataIndex: 'category', key: 'category' },
       { title: 'Описание', dataIndex: 'description', key: 'description' },
-      { title: 'Теги', dataIndex: 'tags', key: 'tags' },
+      {
+        title: 'Теги',
+        dataIndex: 'tags',
+        key: 'tags',
+        render: (tags: string[] | undefined) =>
+          tags?.map((tag) => (
+            <Tag key={tag} color="blue">
+              {tag}
+            </Tag>
+          )) || '-'
+      },
       { title: 'Потрачено', dataIndex: 'amount', key: 'amount' }
     ],
     []

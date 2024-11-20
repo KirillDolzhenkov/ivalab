@@ -1,14 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { expensesSlice } from '@/pages/ExpensesPage/model/expensesSlice.ts';
 import { categoriesSlice } from '@/pages/CategoriesPage/model/categoriesSlice.ts';
-/*import categoriesReducer from 'features/categories/model/categoriesSlice';
-import expensesReducer from 'features/expenses/model/expensesSlice';
-import tagsReducer from 'features/tags/model/tagsSlice';*/
+import { tagsSlice } from '@/pages/TagsPage/model/TagsSlice.ts';
 
 export const store = configureStore({
   reducer: {
     categories: categoriesSlice,
-    /*tags: tagsReducer,*/
+    tags: tagsSlice,
     expenses: expensesSlice
   }
 });

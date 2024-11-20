@@ -19,7 +19,7 @@ interface ExpensesState {
 
 const initialState: ExpensesState = {
   expenses: [
-    { id: 1, date: '17.11.2024', category: 'Машина', description: 'Зарезка', amount: 85.45, tags: ['tag1', 'tag2'] },
+    { id: 1, date: '17.11.2024', category: 'Машина', description: 'Зарезка', amount: 85.45 },
     { id: 2, date: '17.11.2024', category: 'Продукты', amount: 16.87 },
     { id: 3, date: '17.11.2024', category: 'Продукты', description: 'Молосо, хлеб', amount: 16.87 },
     { id: 4, date: '18.11.2024', category: 'Продукты', amount: 12 },
