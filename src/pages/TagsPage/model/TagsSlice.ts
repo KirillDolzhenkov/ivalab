@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
+import { loadFromLocalStorage } from '@/app/loadFromLocalStorage.ts';
 
 export interface ITag {
   id: string;
@@ -12,7 +13,7 @@ interface TagsState {
 }
 
 const initialState: TagsState = {
-  tags: []
+  tags: loadFromLocalStorage('tags', [])
 };
 
 export const slice = createSlice({
