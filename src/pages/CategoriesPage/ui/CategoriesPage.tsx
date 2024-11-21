@@ -3,7 +3,7 @@ import { Table, Button } from 'antd';
 import styles from './Categories.module.less';
 import { useAppSelector } from '@/shared/lib/hooks/useAppSelector.ts';
 import { categoriesActions, categoriesSelectors, ICategory } from '@/pages/CategoriesPage/model/categoriesSlice.ts';
-import { CategoryModal } from '@/entities/CategoryModal/CategoryModal.tsx';
+import { CategoryModal } from '@/features/CategoryModal/ui/CategoryModal.tsx';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch.ts';
 import { expensesActions } from '@/pages/ExpensesPage/model/expensesSlice.ts';
 import { SortOrder } from 'antd/es/table/interface';
@@ -47,7 +47,6 @@ export const CategoriesPage = () => {
     setSelectedCategory(null);
     setOperationType('create');
   };
-
   const handleFormSubmit = (values: ICategory) => {
     if (operationType === 'create') {
       dispatch(categoriesActions.addCategory(values));

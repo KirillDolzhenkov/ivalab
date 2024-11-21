@@ -1,5 +1,5 @@
-export { CategoryModal } from './CategoryModal/CategoryModal';
-export { TagsTable } from './TagsTable/TagsTable';
-export { TagModal } from './TagModal/TagModal';
-export { ExpenseModal } from './ExpenseModal/ExpenseModal';
-export { ExpensesTable } from './ExpensesTable/ExpensesTable';
+
+export { TagsTable } from '@/wigets/tagsTable/ui/TagsTable';
+export { TagModalFooter } from './tagModalFooter/ui/TagModalFooter';
+export { TagRenderer } from '@/entities/tagRenderer/ui/TagRenderer';
+export { ExpenseRenderer } from './expenseRenderer/ui/ExpenseRenderer';

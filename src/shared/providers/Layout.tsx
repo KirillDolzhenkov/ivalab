@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout as AntLayout } from 'antd';
 import styles from './Layout.module.less';
-import { Sidebar } from '@/wigets/Sidebar/SideBar.tsx';
+import { Sidebar } from '@/wigets/sidebar/ui/SideBar.tsx';
 
 const { Content } = AntLayout;
 

@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { Button } from 'antd';
-import { TagsTable } from '@/entities/TagsTable/TagsTable.tsx';
-import { TagModal } from '@/entities/TagModal/TagModal.tsx';
+
+import { TagModal } from '@/features/TagModal/ui/TagModal.tsx';
 
 import { useAppSelector } from '@/shared/lib/hooks/useAppSelector';
 import styles from './TagsPage.module.less';
 import { ITag, tagsActions, tagsSelectors } from '@/pages/TagsPage/model/TagsSlice.ts';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch.ts';
+
+import { TagsTable } from '@/entities';
 import { expensesActions } from '@/pages/ExpensesPage/model/expensesSlice.ts';
 
 export type operationType = 'create' | 'edit' | null;

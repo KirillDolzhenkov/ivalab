@@ -1,11 +1,11 @@
 import { memo, useCallback, useEffect } from 'react';
 import { Button, DatePicker, Form, Input, Modal, Select } from 'antd';
 import dayjs from 'dayjs';
-import { IExpense } from '@/pages/ExpensesPage/model/expensesSlice';
+import { IExpense } from '@/pages/ExpensesPage/model/expensesSlice.ts';
 import styles from './ExpenseModal.module.less';
-import { useAppSelector } from '@/shared/lib/hooks/useAppSelector';
-import { categoriesSelectors } from '@/pages/CategoriesPage/model/categoriesSlice';
-import { tagsSelectors } from '@/pages/TagsPage/model/TagsSlice';
+import { useAppSelector } from '@/shared/lib/hooks/useAppSelector.ts';
+import { categoriesSelectors } from '@/pages/CategoriesPage/model/categoriesSlice.ts';
+import { tagsSelectors } from '@/pages/TagsPage/model/TagsSlice.ts';
 import { operationType } from '@/pages/ExpensesPage/ui/ExpensesPage.tsx';
 
 const { TextArea } = Input;

@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { ExpensesTable } from '@/entities/ExpensesTable/ExpensesTable.tsx';
-import { ExpenseModal } from '@/entities/ExpenseModal/ExpenseModal.tsx';
+import { ExpensesTable } from '@/wigets/expensesTable/ui/ExpensesTable.tsx';
+import { ExpenseModal } from '@/features/ExpenseModal/ui/ExpenseModal.tsx';
 
 import { expensesActions, expensesSelectors, IExpense } from '@/pages/ExpensesPage/model/expensesSlice.ts';
 import styles from './ExpensesPage.module.less';
