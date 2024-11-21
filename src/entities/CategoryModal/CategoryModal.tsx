@@ -45,10 +45,17 @@ export const CategoryModal = memo((props: CategoryModalProps) => {
     {
       validator: (_, value: string) => {
         if (!value) return Promise.resolve();
-        const isDuplicate = existingCategories.some(
-          (category) => category.name.toLowerCase() === value.trim().toLowerCase()
-        );
-        return isDuplicate ? Promise.reject(new Error('Название уже существует!')) : Promise.resolve();
+
+        if (operationType === 'create') {
+          const isDuplicate = existingCategories.some(
+            (category) => category.name.toLowerCase() === value.trim().toLowerCase()
+          );
+          if (isDuplicate) {
+            return Promise.reject(new Error('Название уже существует!'));
+          }
+        }
+
+        return Promise.resolve();
       }
     }
   ];

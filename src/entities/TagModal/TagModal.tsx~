@@ -56,6 +56,7 @@ export const TagModal = memo((props: TagModalProps) => {
       validator: (_, value: string) => {
         if (!value) return Promise.resolve();
 
+        // Проверка на дубликаты только при создании нового тега
         if (operationType === 'create') {
           const isDuplicate = existingTags.some((tag) => tag.name.toLowerCase() === value.trim().toLowerCase());
           if (isDuplicate) {

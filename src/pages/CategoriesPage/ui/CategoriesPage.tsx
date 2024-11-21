@@ -6,6 +6,7 @@ import { categoriesActions, categoriesSelectors, ICategory } from '@/pages/Categ
 import { CategoryModal } from '@/entities/CategoryModal/CategoryModal.tsx';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch.ts';
 import { expensesActions } from '@/pages/ExpensesPage/model/expensesSlice.ts';
+import { SortOrder } from 'antd/es/table/interface';
 
 export type operationType = 'create' | 'edit' | null;
 
@@ -17,8 +18,18 @@ export const CategoriesPage = () => {
   const [operationType, setOperationType] = useState<operationType>(null);
 
   const columnsData = [
-    { title: 'Имя', dataIndex: 'name', key: 'name' },
-    { title: 'Описание', dataIndex: 'description', key: 'description' }
+    {
+      title: 'Название',
+      dataIndex: 'name',
+      key: 'name',
+      sorter: (a: ICategory, b: ICategory) => a.name.localeCompare(b.name),
+      sortDirections: ['ascend' as SortOrder, 'descend' as SortOrder]
+    },
+    {
+      title: 'Описание',
+      dataIndex: 'description',
+      key: 'description'
+    }
   ];
 
   const handleOpenModal = (type: operationType, category: ICategory | null = null) => {
