@@ -5,7 +5,7 @@ React + TypeScript SPA 🚀
 
 ### Links:
 
-> [Expense Tracker](https://expense-tracker.vercel.app) - web application
+> [Expense Tracker](ivalab-expense-tracker-6in8ldapf-kdolzhenkovs-projects.vercel.app) - web application
 
 <hr>
 
