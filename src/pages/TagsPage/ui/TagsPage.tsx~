@@ -1,40 +1,50 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { Button } from 'antd';
-import { TagsTable } from './TagsTable';
-import { TagModal } from './TagModal';
+import { TagsTable } from '@/entities/TagsTable/TagsTable.tsx';
+import { TagModal } from '@/entities/TagModal/TagModal.tsx';
 
 import { useAppSelector } from '@/shared/lib/hooks/useAppSelector';
 import styles from './TagsPage.module.less';
 import { ITag, tagsActions, tagsSelectors } from '@/pages/TagsPage/model/TagsSlice.ts';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch.ts';
+import { expensesActions } from '@/pages/ExpensesPage/model/expensesSlice.ts';
+
+export type operationType = 'create' | 'edit' | null;
 
 export const TagsPage = () => {
   const tags = useAppSelector(tagsSelectors.getTags);
   const dispatch = useAppDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTag, setSelectedTag] = useState<ITag | null>(null);
+  const [operationType, setOperationType] = useState<operationType>(null);
 
-  const handleOpenModal = useCallback(() => {
+  const handleOpenModal = (type: operationType, tag: ITag | null = null) => {
+    setOperationType(type);
+    setSelectedTag(tag);
     setIsModalOpen(true);
-    setSelectedTag(null);
-  }, []);
+  };
 
-  const handleRowClick = useCallback((record: ITag) => {
-    setSelectedTag(record);
-    setIsModalOpen(true);
-  }, []);
+  const handleRowClick = (record: ITag) => {
+    handleOpenModal('edit', record);
+  };
 
-  const handleCloseModal = useCallback(() => {
+  const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedTag(null);
-  }, []);
+    setOperationType('create');
+  };
 
-  const handleFormSubmit = useCallback((values: ITag) => {
-    console.log('Сохранить данные тега:', values);
-    dispatch(tagsActions.addTag(values));
-    setIsModalOpen(false);
-    setSelectedTag(null);
-  }, []);
+  const handleFormSubmit = (values: ITag) => {
+    if (operationType === 'create') {
+      dispatch(tagsActions.addTag(values));
+    } else if (operationType === 'edit' && selectedTag) {
+      const oldTagName = selectedTag.name;
+      const newTagName = values.name;
+      dispatch(tagsActions.updateTag({ ...selectedTag, ...values }));
+      dispatch(expensesActions.updateTagInExpenses({ oldTagName, newTagName }));
+    }
+    handleCloseModal();
+  };
 
   return (
     <div className={styles.tagsWrapper}>
@@ -45,9 +55,10 @@ export const TagsPage = () => {
         onClose={handleCloseModal}
         onSubmit={handleFormSubmit}
         initialData={selectedTag}
+        operationType={operationType}
       />
       <div className={styles.createBtnWrapper}>
-        <Button type="default" onClick={handleOpenModal}>
+        <Button type="default" onClick={() => handleOpenModal('create')}>
           Создать
         </Button>
       </div>

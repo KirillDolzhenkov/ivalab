@@ -1,10 +1,11 @@
 import { memo, useCallback, useEffect, useState } from 'react';
-import { Button, Form, Input, Modal } from 'antd';
-import { ColorPicker } from 'antd';
+import { Button, Form, Input, Modal, ColorPicker } from 'antd';
 import type { Color } from 'antd/es/color-picker';
+import type { Rule } from 'antd/es/form';
 
 import styles from './TagModal.module.less';
-import { ITag } from '@/pages/TagsPage/model/TagsSlice.ts';
+import { ITag } from '@/pages/TagsPage/model/TagsSlice';
+import { operationType } from '@/pages/TagsPage/ui/TagsPage.tsx';
 
 interface TagModalProps {
   isOpen: boolean;
@@ -12,28 +13,32 @@ interface TagModalProps {
   onSubmit: (values: ITag) => void;
   initialData: ITag | null;
   existingTags: ITag[];
+  operationType: operationType;
 }
 
 const DEFAULT_COLOR = '#808080';
 
 export const TagModal = memo((props: TagModalProps) => {
-  const { isOpen, onClose, onSubmit, initialData, existingTags } = props;
+  const { isOpen, onClose, onSubmit, initialData, existingTags, operationType } = props;
   const [form] = Form.useForm();
   const [color, setColor] = useState<string | null>(null);
 
   useEffect(() => {
-    if (initialData) {
-      form.setFieldsValue(initialData);
-      setColor(initialData.color);
-    } else {
-      setColor(null);
+    if (isOpen) {
+      if (operationType === 'edit' && initialData) {
+        form.setFieldsValue(initialData);
+        setColor(initialData.color);
+      } else {
+        form.resetFields();
+        setColor(null);
+      }
     }
-  }, [initialData, form]);
+  }, [isOpen, operationType, initialData, form]);
 
   const handleFormSubmit = useCallback(async () => {
     try {
       const values = await form.validateFields();
-      onSubmit({ ...values, color });
+      onSubmit({ ...values, color: color || DEFAULT_COLOR });
       onClose();
     } catch (error) {
       console.error('Ошибка валидации формы:', error);
@@ -45,24 +50,27 @@ export const TagModal = memo((props: TagModalProps) => {
     setColor(colorHex);
   }, []);
 
+  const nameRules: Rule[] = [
+    { required: true, message: 'Пожалуйста, введите название!' },
+    {
+      validator: (_, value: string) => {
+        if (!value) return Promise.resolve();
+        const isDuplicate = existingTags.some((tag) => tag.name.toLowerCase() === value.trim().toLowerCase());
+        return isDuplicate ? Promise.reject(new Error('Название уже существует!')) : Promise.resolve();
+      }
+    }
+  ];
+
   return (
-    <Modal title="Информация о теге" open={isOpen} onCancel={onClose} footer={null}>
+    <Modal
+      title={operationType === 'create' ? 'Создание нового тега' : 'Редактирование тега'}
+      open={isOpen}
+      onCancel={onClose}
+      footer={null}
+    >
       <Form form={form} layout="vertical">
-        <Form.Item
-          name="name"
-          label="Название"
-          rules={[
-            { required: true, message: 'Пожалуйста, введите название!' },
-            {
-              validator: (_, value) => {
-                if (!value) return Promise.resolve();
-                const isDuplicate = existingTags.some((tag) => tag.name.toLowerCase() === value.trim().toLowerCase());
-                return isDuplicate ? Promise.reject(new Error('Название уже существует!')) : Promise.resolve();
-              }
-            }
-          ]}
-        >
-          <Input />
+        <Form.Item name="name" label="Название" rules={nameRules}>
+          <Input autoComplete="off" />
         </Form.Item>
 
         <Form.Item label="Цвет">
@@ -72,7 +80,7 @@ export const TagModal = memo((props: TagModalProps) => {
 
         <div className={styles.submitButtonWrapper}>
           <Button type="default" onClick={handleFormSubmit}>
-            Сохранить
+            {operationType === 'create' ? 'Создать' : 'Сохранить'}
           </Button>
         </div>
       </Form>

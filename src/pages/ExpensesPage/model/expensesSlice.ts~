@@ -13,13 +13,9 @@ interface ExpensesState {
   expenses: IExpense[];
 }
 
-/*const initialState: ExpensesState = {
-    expenses: JSON.parse(localStorage.getItem('expenses') || '[]'),
-};*/
-
 const initialState: ExpensesState = {
   expenses: [
-    { id: 1, date: '17.11.2024', category: 'Машина', description: 'Зарезка', amount: 85.45 },
+    { id: 1, date: '17.11.2024', category: 'Машина', description: 'Зарезка', amount: 85.45, tags: ['Работа', 'tag2'] },
     { id: 2, date: '17.11.2024', category: 'Продукты', amount: 16.87 },
     { id: 3, date: '17.11.2024', category: 'Продукты', description: 'Молосо, хлеб', amount: 16.87 },
     { id: 4, date: '18.11.2024', category: 'Продукты', amount: 12 },
@@ -52,6 +48,28 @@ export const slice = createSlice({
   reducers: {
     addExpense: (state, action: PayloadAction<IExpense>) => {
       state.expenses.push(action.payload);
+    },
+    updateExpense: (state, action: PayloadAction<IExpense>) => {
+      const index = state.expenses.findIndex((exp) => exp.id === action.payload.id);
+      if (index !== -1) {
+        state.expenses[index] = action.payload;
+      }
+    },
+    updateCategoryInExpenses: (state, action: PayloadAction<{ oldCategoryName: string; newCategoryName: string }>) => {
+      const { oldCategoryName, newCategoryName } = action.payload;
+      state.expenses.forEach((expense) => {
+        if (expense.category === oldCategoryName) {
+          expense.category = newCategoryName;
+        }
+      });
+    },
+    updateTagInExpenses: (state, action: PayloadAction<{ oldTagName: string; newTagName: string }>) => {
+      const { oldTagName, newTagName } = action.payload;
+      state.expenses.forEach((expense) => {
+        if (expense.tags) {
+          expense.tags = expense.tags.map((tag) => (tag === oldTagName ? newTagName : tag));
+        }
+      });
     }
   },
   selectors: {

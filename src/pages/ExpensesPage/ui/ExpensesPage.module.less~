@@ -1,5 +1,8 @@
 .expensesWrapper {
     padding: 10px;
+    /*background: #dfe7f3;
+    min-height: 100vh;
+    min-width: 80vw;*/
 }
 
 .createBtnWrapper{

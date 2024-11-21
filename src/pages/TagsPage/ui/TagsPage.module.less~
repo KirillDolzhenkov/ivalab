@@ -1,5 +1,7 @@
 .tagsWrapper {
   padding: 10px;
+ /* background: #dfe7f3;*/
+/*  height: 100vh;*/
 }
 
 .createBtnWrapper{

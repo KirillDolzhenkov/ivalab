@@ -9,22 +9,28 @@ export const Sidebar = () => {
   const location = useLocation();
   const [collapsed, setCollapsed] = useState(false);
 
+  const menuItems = [
+    {
+      key: '/',
+      label: <Link to="/">Расходы</Link>
+    },
+    {
+      key: '/categories',
+      label: <Link to="/categories">Категории</Link>
+    },
+    {
+      key: '/tags',
+      label: <Link to="/tags">Теги</Link>
+    }
+    // {
+    //   key: '/analytics',
+    //   label: <Link to="/analytics">Аналитика</Link>,
+    // },
+  ];
+
   return (
-    <Sider collapsed={collapsed} collapsible onCollapse={setCollapsed} theme="light" width={200}>
-      <Menu mode="inline" selectedKeys={[location.pathname]} className={styles.menu}>
-        <Menu.Item key="/expenses">
-          <Link to="/expenses">Расходы</Link>
-        </Menu.Item>
-        <Menu.Item key="/categories">
-          <Link to="/categories">Категории</Link>
-        </Menu.Item>
-        <Menu.Item key="/tags">
-          <Link to="/tags">Теги</Link>
-        </Menu.Item>
-        {/*<Menu.Item key="analytics">
-            <Link to="/analytics">Аналитика</Link>
-         </Menu.Item>*/}
-      </Menu>
+    <Sider collapsed={collapsed} onCollapse={setCollapsed} theme="light" width={styles.width}>
+      <Menu mode="inline" selectedKeys={[location.pathname]} className={styles.menu} items={menuItems} />
     </Sider>
   );
 };

@@ -1,42 +1,54 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { Table, Button } from 'antd';
 import styles from './Categories.module.less';
 import { useAppSelector } from '@/shared/lib/hooks/useAppSelector.ts';
-import { categoriesSelectors, ICategory } from '@/pages/CategoriesPage/model/categoriesSlice.ts';
-import { CategoryModal } from '@/entities/CategoriesModal/CategoriesModal.tsx';
+import { categoriesActions, categoriesSelectors, ICategory } from '@/pages/CategoriesPage/model/categoriesSlice.ts';
+import { CategoryModal } from '@/entities/CategoryModal/CategoryModal.tsx';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch.ts';
+import { expensesActions } from '@/pages/ExpensesPage/model/expensesSlice.ts';
+
+export type operationType = 'create' | 'edit' | null;
 
 export const CategoriesPage = () => {
   const categories = useAppSelector(categoriesSelectors.getCategories);
+  const dispatch = useAppDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<ICategory | null>(null);
+  const [operationType, setOperationType] = useState<operationType>(null);
 
   const columnsData = [
     { title: 'Имя', dataIndex: 'name', key: 'name' },
     { title: 'Описание', dataIndex: 'description', key: 'description' }
   ];
 
-  const handleRowClick = useCallback((record: ICategory) => {
-    setSelectedCategory(record);
+  const handleOpenModal = (type: operationType, category: ICategory | null = null) => {
+    setOperationType(type);
+    setSelectedCategory(category);
     setIsModalOpen(true);
-  }, []);
+  };
 
-  const handleOpenModal = useCallback(() => {
-    setSelectedCategory(null); // Новый объект, если создание
-    setIsModalOpen(true);
-  }, []);
+  const handleRowClick = (record: ICategory) => {
+    handleOpenModal('edit', record);
+  };
 
-  const handleCloseModal = useCallback(() => {
+  const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedCategory(null);
-  }, []);
+    setOperationType('create');
+  };
 
-  const handleFormSubmit = useCallback(
-    (values: ICategory) => {
-      console.log('Сохранить данные категории:', values);
-      handleCloseModal();
-    },
-    [handleCloseModal]
-  );
+  const handleFormSubmit = (values: ICategory) => {
+    if (operationType === 'create') {
+      dispatch(categoriesActions.addCategory(values));
+    } else if (operationType === 'edit' && selectedCategory) {
+      const oldCategoryName = selectedCategory.name;
+      const newCategoryName = values.name;
+
+      dispatch(categoriesActions.updateCategory({ ...selectedCategory, ...values }));
+      dispatch(expensesActions.updateCategoryInExpenses({ oldCategoryName, newCategoryName }));
+    }
+    handleCloseModal();
+  };
 
   return (
     <div className={styles.expensesWrapper}>
@@ -50,7 +62,7 @@ export const CategoriesPage = () => {
         })}
       />
       <div className={styles.createBtnWrapper}>
-        <Button type="default" onClick={handleOpenModal}>
+        <Button type="default" onClick={() => handleOpenModal('create')}>
           Создать
         </Button>
       </div>
@@ -59,6 +71,7 @@ export const CategoriesPage = () => {
         onClose={handleCloseModal}
         onSubmit={handleFormSubmit}
         initialData={selectedCategory}
+        operationType={operationType}
       />
     </div>
   );

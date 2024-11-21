@@ -12,8 +12,8 @@ interface TagsState {
 
 const initialState: TagsState = {
   tags: [
-    { id: 1, name: 'Работа', color: 'red' },
-    { id: 2, name: 'Отдых', color: 'blue' }
+    { id: 1, name: 'Работа', color: '#ff0000' },
+    { id: 2, name: 'Отдых', color: '#ff0000' }
   ]
 };
 
@@ -32,7 +32,8 @@ export const slice = createSlice({
     }
   },
   selectors: {
-    getTags: (state) => state.tags
+    getTags: (state) => state.tags,
+    getTagByName: (state) => (tagName: string) => state.tags.find((tag) => tag.name === tagName)
   }
 });
 
