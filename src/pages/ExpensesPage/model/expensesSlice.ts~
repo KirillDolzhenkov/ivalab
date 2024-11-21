@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface IExpense {
-  id: number;
+  id: string;
   date: string;
   category: string;
   description?: string;
