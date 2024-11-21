@@ -5,13 +5,13 @@ React + TypeScript SPA 🚀
 
 ### Links:
 
-> [Expense Tracker](ivalab-expense-tracker-6in8ldapf-kdolzhenkovs-projects.vercel.app) - web application
+> [Expense Tracker](ivalab-expense-tracker.vercel.app) - web application
 
 <hr>
 
 ### Description:
 
-Expense Tracker is a web application designed to help you manage and control your expenses. With this app, you can easily track your spending, categorize expenses, and view detailed reports. The application provides a user-friendly interface with features like adding, editing, and deleting expenses, as well as filtering and sorting options.
+Expense Tracker is a web application designed to help you manage and control your expenses. With this app, you can easily track your spending, categorize expenses, and view detailed reports. The application provides a user-friendly interface with features like adding, editing, and deleting expenses, as well as sorting options.
 
 ![mock-up](./public/mockup.png)
 
