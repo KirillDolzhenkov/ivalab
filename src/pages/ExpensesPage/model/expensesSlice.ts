@@ -35,6 +35,9 @@ export const slice = createSlice({
         state.expenses[index] = action.payload;
       }
     },
+    deleteExpense: (state, action: PayloadAction<string>) => {
+      state.expenses = state.expenses.filter((expense) => expense.id !== action.payload);
+    },
     updateCategoryInExpenses: (state, action: PayloadAction<{ oldCategoryName: string; newCategoryName: string }>) => {
       const { oldCategoryName, newCategoryName } = action.payload;
       state.expenses.forEach((expense) => {

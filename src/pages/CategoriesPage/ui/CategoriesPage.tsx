@@ -61,6 +61,11 @@ export const CategoriesPage = () => {
     handleCloseModal();
   };
 
+  const handleDeleteCategory = (categoryId: string) => {
+    dispatch(categoriesActions.deleteCategory(categoryId));
+    handleCloseModal();
+  };
+
   return (
     <div className={styles.expensesWrapper}>
       <Table
@@ -81,6 +86,7 @@ export const CategoriesPage = () => {
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         onSubmit={handleFormSubmit}
+        onDelete={handleDeleteCategory} // Передаем функцию удаления
         initialData={selectedCategory}
         operationType={operationType}
       />

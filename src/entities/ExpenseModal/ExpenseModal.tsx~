@@ -127,9 +127,9 @@ export const ExpenseModal = memo((props: ExpenseModalProps) => {
           </Button>
 
           {operationType === 'edit' && initialData && (
-            <Button type="default" danger onClick={handleDelete}>
-              Удалить
-            </Button>
+              <Button type="default" danger onClick={handleDelete}>
+                Удалить
+              </Button>
           )}
         </div>
       </Form>

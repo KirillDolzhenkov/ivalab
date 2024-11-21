@@ -13,10 +13,11 @@ interface CategoryModalProps {
   onSubmit: (values: ICategory) => void;
   initialData: ICategory | null;
   operationType: operationType;
+  onDelete: (categoryId: string) => void;
 }
 
 export const CategoryModal = memo((props: CategoryModalProps) => {
-  const { isOpen, onClose, onSubmit, initialData, operationType } = props;
+  const { isOpen, onClose, onSubmit, initialData, operationType, onDelete } = props;
   const [form] = Form.useForm();
   const existingCategories = useAppSelector(categoriesSelectors.getCategories);
 
@@ -60,6 +61,13 @@ export const CategoryModal = memo((props: CategoryModalProps) => {
     }
   ];
 
+  const handleDelete = useCallback(() => {
+    if (initialData) {
+      onDelete(initialData.id);
+      onClose();
+    }
+  }, [initialData, onDelete, onClose]);
+
   return (
     <Modal
       title={operationType === 'create' ? 'Создание новой категории' : 'Редактирование категории'}
@@ -80,6 +88,12 @@ export const CategoryModal = memo((props: CategoryModalProps) => {
           <Button type="default" onClick={handleFormSubmit}>
             {operationType === 'create' ? 'Создать' : 'Сохранить'}
           </Button>
+
+          {operationType === 'edit' && initialData && (
+            <Button type="default" danger onClick={handleDelete}>
+              Удалить
+            </Button>
+          )}
         </div>
       </Form>
     </Modal>

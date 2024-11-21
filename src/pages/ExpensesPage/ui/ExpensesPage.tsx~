@@ -48,9 +48,13 @@ export const ExpensesPage = () => {
 
   return (
     <div className={styles.expensesWrapper}>
-      <ExpensesTable expenses={expenses} onRowClick={handleRowClick} />
+      <ExpensesTable
+        expenses={expenses}
+        onRowClick={handleRowClick}
+
+      />
       <ExpenseModal
-        onDelete={handleDeleteExpense}
+          onDelete={handleDeleteExpense} 
         key={operationType}
         isOpen={isModalOpen}
         onClose={handleCloseModal}

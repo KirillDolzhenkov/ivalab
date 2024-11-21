@@ -11,7 +11,7 @@ interface TagModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSubmit: (values: ITag) => void;
-  onDelete: (tagId: string) => void;
+  onDelete: (tagId: string) => void; // Добавляем пропс для удаления
   initialData: ITag | null;
   existingTags: ITag[];
   operationType: operationType;

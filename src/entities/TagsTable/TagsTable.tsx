@@ -1,6 +1,7 @@
 import { memo, useMemo } from 'react';
 import { Table, Tag } from 'antd';
 import { ITag } from '@/pages/TagsPage/model/TagsSlice.ts';
+import { SortOrder } from 'antd/es/table/interface';
 
 interface TagsTableProps {
   tags: ITag[];
@@ -17,7 +18,9 @@ export const TagsTable = memo((props: TagsTableProps) => {
         title: 'Название',
         dataIndex: 'name',
         key: 'name',
-        render: renderedTag
+        render: renderedTag,
+        sorter: (a: ITag, b: ITag) => a.name.localeCompare(b.name),
+        sortDirections: ['ascend' as SortOrder, 'descend' as SortOrder]
       }
     ],
     []

@@ -53,22 +53,22 @@ export const TagsPage = () => {
   };
 
   return (
-    <div className={styles.tagsWrapper}>
-      <TagsTable tags={tags} onRowClick={handleRowClick} />
-      <TagModal
-        existingTags={tags}
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        onSubmit={handleFormSubmit}
-        onDelete={handleDeleteTag}
-        initialData={selectedTag}
-        operationType={operationType}
-      />
-      <div className={styles.createBtnWrapper}>
-        <Button type="default" onClick={() => handleOpenModal('create')}>
-          Создать
-        </Button>
+      <div className={styles.tagsWrapper}>
+        <TagsTable tags={tags} onRowClick={handleRowClick} />
+        <TagModal
+            existingTags={tags}
+            isOpen={isModalOpen}
+            onClose={handleCloseModal}
+            onSubmit={handleFormSubmit}
+            onDelete={handleDeleteTag}
+            initialData={selectedTag}
+            operationType={operationType}
+        />
+        <div className={styles.createBtnWrapper}>
+          <Button type="default" onClick={() => handleOpenModal('create')}>
+            Создать
+          </Button>
+        </div>
       </div>
-    </div>
   );
 };
