@@ -43,7 +43,6 @@ export const slice = createSlice({
   }
 });
 
-export const tagsThunks = {};
 export const tagsActions = slice.actions;
 export const tagsSlice = slice.reducer;
 export const tagsSelectors = slice.selectors;

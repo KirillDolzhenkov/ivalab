@@ -42,7 +42,6 @@ export const slice = createSlice({
   }
 });
 
-export const categoriesThunks = {};
 export const categoriesActions = slice.actions;
 export const categoriesSelectors = slice.selectors;
 export const categoriesSlice = slice.reducer;

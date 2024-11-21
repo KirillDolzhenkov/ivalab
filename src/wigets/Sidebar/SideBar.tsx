@@ -22,10 +22,6 @@ export const Sidebar = () => {
       key: '/tags',
       label: <Link to="/tags">Теги</Link>
     }
-    // {
-    //   key: '/analytics',
-    //   label: <Link to="/analytics">Аналитика</Link>,
-    // },
   ];
 
   return (

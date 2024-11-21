@@ -10,6 +10,5 @@ export const AppRoutes = () => (
     <Route path="/categories" element={<CategoriesPage />} />
     <Route path="/tags" element={<TagsPage />} />
     <Route path="*" element={<NotFoundPage />} />
-    {/*<Route path="/analytics" element={<AnalyticsPage />} />*/}
   </Routes>
 );

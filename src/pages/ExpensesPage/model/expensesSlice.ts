@@ -61,7 +61,6 @@ export const slice = createSlice({
   }
 });
 
-export const expensesThunks = {};
 export const expensesActions = slice.actions;
 export const expensesSlice = slice.reducer;
 export const expensesSelectors = slice.selectors;
