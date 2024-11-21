@@ -37,7 +37,11 @@ Styles: module Less
   <tr>
     <td>react</td>
     <td>typescript</td>
-  </tr>  
+  </tr>
+<tr>
+    <td>less</td>
+    <td>react-dom</td>
+  </tr>
   <tr>
     <td>prettier</td>
     <td>stylelint</td>

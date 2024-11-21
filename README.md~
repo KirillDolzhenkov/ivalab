@@ -19,7 +19,7 @@ Expense Tracker is a web application designed to help you manage and control you
 
 Build tool: Vite
 
-Styles: module SCSS
+Styles: module Less
 
 <hr>
 
@@ -37,10 +37,14 @@ Styles: module SCSS
   <tr>
     <td>react</td>
     <td>typescript</td>
-  </tr>  
+  </tr>
+<tr>
+    <td>less</td>
+    <td>vite</td>
+  </tr>
   <tr>
     <td>prettier</td>
-    <td></td>
+    <td>stylelint</td>
   </tr>  
   <tr>
     <td>eslint</td>
