@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { v4 as uuidv4 } from 'uuid';
 
 export interface ICategory {
-  id: number;
+  id: string;
   name: string;
   description?: string;
 }
@@ -11,18 +12,19 @@ interface CategoriesState {
 }
 
 const initialState: CategoriesState = {
-  categories: [
-    { id: 1, name: 'Продукты', description: 'Еда и напитки' },
-    { id: 2, name: 'Машина', description: 'Транспортные расходы' }
-  ]
+  categories: []
 };
 
 export const slice = createSlice({
   name: 'categories',
   initialState,
   reducers: {
-    addCategory: (state, action: PayloadAction<ICategory>) => {
-      state.categories.push(action.payload);
+    addCategory: (state, action: PayloadAction<Omit<ICategory, 'id'>>) => {
+      const newCategory: ICategory = {
+        ...action.payload,
+        id: uuidv4()
+      };
+      state.categories.push(newCategory);
     },
     updateCategory: (state, action: PayloadAction<ICategory>) => {
       const index = state.categories.findIndex((cat) => cat.id === action.payload.id);
@@ -36,6 +38,7 @@ export const slice = createSlice({
   }
 });
 
+export const categoriesThunks = {};
 export const categoriesActions = slice.actions;
 export const categoriesSelectors = slice.selectors;
 export const categoriesSlice = slice.reducer;
